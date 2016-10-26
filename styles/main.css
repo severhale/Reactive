@@ -12,3 +12,8 @@ html body {
     top: 0;
     left: 0;
 }
+
+#player {
+    position: absolute;
+    bottom: 0;
+}
