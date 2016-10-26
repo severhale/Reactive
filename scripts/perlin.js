@@ -358,6 +358,10 @@
             v);
     };
 
+    module.normalizeNoise = function (t) {
+        return t * t * t * (3 * t * (2 * t - 5) + 10);
+    }
+
     module.periodicNoise = function (x, seed, period) {
         var angle = (x / period) * 2 * Math.PI;
         return noise.simplex2(period * Math.cos(angle) + seed, period * Math.sin(angle) + seed) * .5 + .5;
