@@ -3,17 +3,20 @@ window.onload = function () {
     var button = document.getElementById("play");
 
     var begin = function () {
-        beginAudio();
-        beginVisualization();
-        button.parentElement.className = "hidden";
-        document.onkeypress = function (event) {
-            if ((event.which || event.keyCode) == 32) {
-                if (playing) {
-                    pauseAudio();
-                } else {
-                    resumeAudio();
+        if (!playing) {
+            beginAudio();
+            beginVisualization();
+            button.parentElement.className = "hidden";
+            button.disabled = true;
+            document.onkeypress = function (event) {
+                if ((event.which || event.keyCode) == 32) {
+                    if (playing) {
+                        pauseAudio();
+                    } else {
+                        resumeAudio();
+                    }
+                    playing = !playing;
                 }
-                playing = !playing;
             }
         }
     };
