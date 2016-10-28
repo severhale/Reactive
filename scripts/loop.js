@@ -37,8 +37,23 @@ var Loop = function (numPoints, smoothness) {
         path.fillColor = color;
     }
 
+    function setBrightness(brightness) {
+        path.fillColor.brightness = brightness;
+    }
+
+    function setSaturation(saturation) {
+        path.fillColor.saturation = saturation;
+    }
+
+    function setAlpha(alpha) {
+        path.fillColor.alpha = alpha;
+    }
+
     return {
         update: update,
-        setColor: setColor
+        setColor: setColor,
+        setBrightness: setBrightness,
+        setSaturation: setSaturation,
+        setAlpha: setAlpha
     }
 };

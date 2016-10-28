@@ -25,9 +25,11 @@ window.onload = function () {
     //    var lastChange = 0;
     var lastVols = [];
     var lastChanges = [];
+    var lastBrightnesses = [];
     for (var i = 0; i < loops.length; i++) {
         lastVols.push(0);
         lastChanges.push(0);
+        lastBrightnesses.push(0);
     }
 
     var binsPerLoop = frequencyData.length / loops.length;
@@ -42,11 +44,19 @@ window.onload = function () {
                 vol += frequencyData[j];
             }
             vol = vol * scaling / binsPerLoop;
-            var volChange = Math.min(Math.abs(vol - lastVols[i]), 10);
+            var volChange = Math.min(Math.abs(vol - lastVols[i]), .09);
             volChange = easing * volChange + (1 - easing) * lastChanges[i];
             loops[i].update(volChange);
+
+            var brightness = vol / .7;
+            brightness = .5 * brightness + .5 * lastBrightnesses[i];
+            loops[i].setBrightness(brightness);
+            //            loops[i].setSaturation(brightness);
+            loops[i].setAlpha(brightness);
+
             lastChanges[i] = volChange;
             lastVols[i] = vol;
+            lastBrightnesses[i] = brightness;
         }
 
         //        var avg = 0;
