@@ -1,7 +1,7 @@
 var easing = .9;
 var scaling = 1 / 400;
 var numLoops = 3;
-window.onload = function () {
+var beginVisualization = function () {
     paper.install(window);
     var canvas = document.getElementById('canvas');
     canvas.width = window.innerWidth;
@@ -36,7 +36,7 @@ window.onload = function () {
     console.log("Bins per loop: " + binsPerLoop);
 
     view.onFrame = function (event) {
-        analyser.getByteFrequencyData(frequencyData);
+        updateData(frequencyData);
 
         for (var i = 0; i < loops.length; i++) {
             var vol = 0;
@@ -58,23 +58,5 @@ window.onload = function () {
             lastVols[i] = vol;
             lastBrightnesses[i] = brightness;
         }
-
-        //        var avg = 0;
-        //        for (var i = 0; i < frequencyData.length; i++) {
-        //            avg += frequencyData[i];
-        //        }
-        //        avg /= frequencyData.length;
-        //        var vol = avg * scaling;
-        //        //        var volChange = Math.abs(vol - lastVol) / (lastVol + 1);
-        //        //        var volChange = Math.min(Math.abs(vol - lastVol), 20);
-        //        var volChange = Math.min(Math.abs(vol - lastVol) / (lastVol + 1), 10);
-        //        volChange = easing * volChange + (1 - easing) * lastChange;
-        //
-        //        for (var i = 0; i < loops.length; i++) {
-        //            loops[i].update(volChange);
-        //        }
-        //
-        //        lastChange = volChange;
-        //        lastVol = vol;
     };
 };

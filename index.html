@@ -5,17 +5,22 @@
     <title>audioviz</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="shortcut icon" href="">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </head>
 
 <body>
     <canvas resize id="canvas"></canvas>
-    <audio controls id="player" src="files/georgia.mp3"></audio>
+    <div id="splash">
+        <button id="play">play</button>
+    </div>
+    <audio controls id="player" hidden loop src="files/georgia.mp3"></audio>
 
     <script type="text/javascript" src="scripts/paper-full.js"></script>
     <script type=text/javascript src="scripts/perlin.js"></script>
     <script type="text/javascript" src="scripts/player.js"></script>
     <script type="text/javascript" src="scripts/visualizer.js"></script>
     <script type="text/javascript" src="scripts/loop.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,25 @@
+html,
 html body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+#splash {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 #canvas {
@@ -18,4 +35,19 @@ html body {
     position: absolute;
     min-height: 32px;
     bottom: 0;
+}
+
+#play {
+    background: rgba(102, 185, 229, 0.75);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding: 20px;
+    font-size: 36px;
+    font-family: 'Pacifico', cursive;
+}
+
+.hidden {
+    opacity: 0;
+    transition: .3s;
 }
