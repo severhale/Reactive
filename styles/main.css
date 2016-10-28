@@ -35,20 +35,18 @@ html body {
     left: 0;
 }
 
-#player {
-    position: absolute;
-    min-height: 32px;
-    bottom: 0;
-}
-
 #play {
     background: rgba(102, 185, 229, 0.75);
     border-radius: 10px;
     border: none;
     outline: none;
-    padding: 20px;
-    font-size: 36px;
+    padding: 7vmin;
+    font-size: 10vmin;
     font-family: inherit;
+}
+
+#space_text {
+    font-size: 5vmin;
 }
 
 .hidden {
