@@ -42,7 +42,7 @@ window.onload = function () {
                 vol += frequencyData[j];
             }
             vol = vol * scaling / binsPerLoop;
-            var volChange = Math.min(Math.abs(vol - lastVols[i]) / (lastVols[i] + 1), 10);
+            var volChange = Math.min(Math.abs(vol - lastVols[i]), 10);
             volChange = easing * volChange + (1 - easing) * lastChanges[i];
             loops[i].update(volChange);
             lastChanges[i] = volChange;
