@@ -17,7 +17,6 @@ var Loop = function (numPoints, smoothness) {
         for (var i = 0; i < numPoints; i++) {
             path.add(getPoint(i, numPoints));
         }
-        //        path.add(path.segments[0].point);
         path.smooth();
     }
 
@@ -29,7 +28,6 @@ var Loop = function (numPoints, smoothness) {
         for (var i = 0; i < numPoints; i++) {
             path.segments[i].point = getPoint(i, numPoints);
         }
-        //        path.add(path.segments[0].point);
         path.smooth();
     }
 

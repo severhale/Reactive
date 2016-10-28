@@ -21,8 +21,6 @@ var beginVisualization = function () {
         console.log("Added loop");
     }
 
-    //    var lastVol = 0;
-    //    var lastChange = 0;
     var lastVols = [];
     var lastChanges = [];
     var lastBrightnesses = [];
@@ -44,7 +42,7 @@ var beginVisualization = function () {
                 vol += frequencyData[j];
             }
             vol = vol * scaling / binsPerLoop;
-            var volChange = Math.min(Math.abs(vol - lastVols[i]), .09);
+            var volChange = Math.min(Math.abs(vol - lastVols[i]) / (lastVols[i] + 1), .09);
             volChange = easing * volChange + (1 - easing) * lastChanges[i];
             loops[i].update(volChange);
 

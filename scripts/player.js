@@ -21,6 +21,14 @@ var beginAudio = function () {
     audioElement.play();
 };
 
+var pauseAudio = function () {
+    audioElement.pause();
+}
+
+var resumeAudio = function () {
+    audioElement.play();
+}
+
 var updateData = function (fData) {
     if (analyser != null) {
         analyser.getByteFrequencyData(fData);
