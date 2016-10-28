@@ -2,7 +2,7 @@ var audioElement = document.getElementById("player");
 var volumeDisplay = document.getElementById("volume");
 var context = new(window.AudioContext || window.webkitAudioContext)();
 var analyser = context.createAnalyser();
-analyser.frequencyBinCount = 2;
+analyser.fftSize = 32;
 var frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
 audioElement.addEventListener("canplay", function () {
