@@ -358,10 +358,27 @@
             v);
     };
 
+    // NOTE: EVERYTHING AFTER THIS POINT IS WRITTEN BY ME, SIMON EVER-HALE
+    // EVERYTHING BEFORE THIS WAS WRITTEN BY STEFAN GUSTAVSON
+
     module.normalizeNoise = function (t) {
         return t * t * t * (3 * t * (2 * t - 5) + 10);
     }
 
+    // a function to generate perfectly looping noise
+    // technically uses simplex noise not perlin noise because i read that it's faster
+
+    // first parameter: the parameter that you want to cycle on
+    // second parameter: seed parameter to give different results for different seed values
+    // third parameter: period of the cycle for first parameter. 
+
+    // Ex. if third parameter is 10, then the values
+    // output for all calls to this with first parameter between 0 and 10 will be exactly the same
+    // as the values for all calls with first parameter between 10 and 20, 20 and 30, etc.
+    // imagine a noisy line that keeps repeating seamlessly with period 10
+
+    // works by mapping from a single value (x/period, which is equal to how far along the cycle you are)
+    // to two values, representing the x and y coordinates of the point that percentage along the circumference of a circle
     module.periodicNoise = function (x, seed, period) {
         var angle = (x / period) * 2 * Math.PI;
         return noise.simplex2(period * Math.cos(angle) + seed, period * Math.sin(angle) + seed) * .5 + .5;
