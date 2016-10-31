@@ -76,7 +76,7 @@ var beginVisualization = function () {
             // pass volume change to loop as parameter for its next movement
             loops[i].update(volChange);
 
-            // gorss hard coded thing to find brightness proportional to volume
+            // gross hard coded thing to find brightness proportional to volume
             var brightness = vol / .7;
 
             // serious brightness smoothing to prevent strobe effect
