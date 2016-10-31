@@ -1,8 +1,6 @@
-html {
-    font-family: 'Pacifico', cursive;
-}
-
+html,
 html body {
+    font-family: 'Pacifico', cursive;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -47,6 +45,21 @@ html body {
 
 #space_text {
     font-size: 5vmin;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    padding: 2px 7px;
+}
+
+#tagline {
+    color: rgb(136, 168, 185);
+    font-family: monospace;
+}
+
+#tagline a {
+    color: inherit;
 }
 
 .hidden {
