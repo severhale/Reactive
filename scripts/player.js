@@ -8,11 +8,13 @@ var context;
 // the module that tracks frequency levels
 var analyser;
 // how many frequency ranges do we want to keep track of
-var numBins = 16;
+var numBins = 1024;
 // where we're gonna save the frequency data
 var frequencyData = new Uint8Array(numBins);
 // reference to the data source (an audio file)
 var source = null;
+
+var localFile = true;
 
 // in a function so we can call it with a button or keypress
 var beginAudio = function () {
@@ -22,11 +24,27 @@ var beginAudio = function () {
     analyser = context.createAnalyser();
     analyser.fftSize = numBins * 2;
 
-    source = context.createMediaElementSource(audioElement);
-    source.connect(analyser);
-    analyser.connect(context.destination);
-    audioElement.load();
-    audioElement.play();
+    if (localFile) {
+        source = context.createMediaElementSource(audioElement);
+        source.connect(analyser);
+        analyser.connect(context.destination);
+
+        audioElement.load();
+        audioElement.play();
+    } else {
+        navigator.getUserMedia({
+                audio: true
+            },
+            function (stream) {
+                source = context.createMediaStreamSource(stream);
+                source.connect(analyser);
+            },
+            function (e) {
+                alert('Error capturing audio.');
+            }
+        );
+    }
+
 };
 
 // pause audio

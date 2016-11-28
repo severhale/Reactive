@@ -10,6 +10,7 @@ window.onload = function () {
         if (!playing) {
             beginAudio();
             beginVisualization();
+            playing = true;
 
             // once we start playing, want to get rid of splash screen and allow playing and pausing with space bar
             button.parentElement.className = "hidden";

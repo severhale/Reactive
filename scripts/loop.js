@@ -32,15 +32,19 @@ var Loop = function (numPoints, smoothness) {
     init();
 
     // update by amount. larger amount is, the more the loop will change
-    function update(amount) {
+    function update(amount, volume, maxVolume, basePos) {
         // we change xSeed and ySeed by amount. that means that the next time we generate the loop
         // the seed parameters for the noise function will be slightly different, and so the loop will be slightly different.
         // this is how you get smooth movement of the loops over time
         xSeed += amount;
         ySeed += amount;
+        var t = Math.min(volume / maxVolume, 1);
+        //        var t = 0;
+        var r = 50;
         for (var i = 0; i < numPoints; i++) {
+            var angle = i / numPoints * 2 * Math.PI;
             // re-generate each point in the path
-            path.segments[i].point = getPoint(i, numPoints);
+            path.segments[i].point = getPoint(i, numPoints).multiply(t).add(new Point(basePos.x + r * Math.cos(angle), basePos.y + r * Math.sin(angle)).multiply(1 - t));
         }
         // smooth the path to make it real nice.
         path.smooth();
