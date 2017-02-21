@@ -20,6 +20,7 @@ var localFile = true;
 var beginAudio = function () {
     // getting audio element, hooking it up to audio analyser and audio source, starting the song
     audioElement = document.getElementById("player");
+    audioElement.crossOrigin = "anonymous";
     context = new(window.AudioContext || window.webkitAudioContext)();
     analyser = context.createAnalyser();
     analyser.fftSize = numBins * 2;

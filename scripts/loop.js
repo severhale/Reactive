@@ -7,6 +7,8 @@ var Loop = function (numPoints, smoothness) {
     var xSeed = Math.random() * 1000 - 500;
     var ySeed = Math.random() * 1000 - 500;
 
+    var rad = 75;
+
     // creating actual paper.js shape for this loop
     var path = new Path();
     path.fillColor = new Color(0, 0, 0, .5);
@@ -39,12 +41,10 @@ var Loop = function (numPoints, smoothness) {
         xSeed += amount;
         ySeed += amount;
         var t = Math.min(volume / maxVolume, 1);
-        //        var t = 0;
-        var r = 50;
         for (var i = 0; i < numPoints; i++) {
             var angle = i / numPoints * 2 * Math.PI;
             // re-generate each point in the path
-            path.segments[i].point = getPoint(i, numPoints).multiply(t).add(new Point(basePos.x + r * Math.cos(angle), basePos.y + r * Math.sin(angle)).multiply(1 - t));
+            path.segments[i].point = getPoint(i, numPoints).multiply(t).add(new Point(basePos.x + rad * Math.cos(angle), basePos.y + rad * Math.sin(angle)).multiply(1 - t));
         }
         // smooth the path to make it real nice.
         path.smooth();
