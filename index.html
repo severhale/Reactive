@@ -9,17 +9,20 @@
 </head>
 
 <body>
-    <canvas resize id="canvas"></canvas>
     <div id="splash">
         <button id="play">play</button>
         <p id="space_text">or press space</p>
+        <input type="range">
+        <p>Upload file: <input type="file" id="song_upload"></p>
     </div>
+    <button id="back" class="hidden" href="#">back</button>
+    <audio controls id="player" hidden loop src="files/georgia.mp3"></audio>
     <footer>
         <span id="tagline">An experiment by <a href="http://severhale.github.io">Simon Ever-Hale</a></span>
     </footer>
-    <audio controls id="player" hidden loop src="files/georgia.mp3"></audio>
 
 
+    <canvas resize id="canvas"></canvas>
 
     <!--   CHECK OUT THIS CODE ITS DOCUMENTED    -->
 

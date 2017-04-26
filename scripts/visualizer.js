@@ -8,6 +8,8 @@ var scaling = 1 / 400;
 // number of loops
 var numLoops = 3;
 
+var playing = false;
+
 // put it all in a function so it can be triggered by a button or a key press
 var beginVisualization = function () {
     // initializing paper.js
@@ -70,20 +72,30 @@ var beginVisualization = function () {
         indices[n] = data.length;
         return indices;
 
-        //        return [0, 100, 300, 1024];
+        // indices = [];
+        // for (var i=0; i<numLoops; i++) {
+        //   indices.push(i / numLoops * data.length * .4);
+        // }
+        // indices.push(data.length);
+        //
+        // return indices;
     };
 
     view.onFrame = function (event) {
         // call player.js updateData function so that frequencyData will have new frequency data
-        updateData();
+        var indices = lastIndices;
+        if (playing) {
+          indices = binIndices(frequencyData, loops.length);
+        }
 
-        var indices = binIndices(frequencyData, loops.length);
+        updateData();
         //        if (indices.length !== 4) {
-        console.log(lastIndices);
+        // console.log(lastIndices);
         //        }
 
+        var lerpC = .01;
         for (var i = 0; i < loops.length; i++) {
-            indices[i + 1] = .9 * indices[i + 1] + .1 * lastIndices[i + 1];
+            indices[i + 1] = lerpC * indices[i + 1] + (1 - lerpC) * lastIndices[i + 1];
             //            console.log(indices[i + 1]);
             var vol = 0;
 
@@ -99,12 +111,15 @@ var beginVisualization = function () {
             }
 
             // multiply by scaling constant and divide by binsPerLoop to find average
-            vol = vol * scaling / numBins;
+            vol = vol * scaling / (numFreqs / numLoops) * 2/(.1*i + 1);
             //            console.log(vol);
             //            vol = vol * scaling;
 
 
-            var volChange = Math.min(Math.abs(vol - lastVols[i]) / (lastVols[i] + .55), .09);
+            var volChange = Math.min(Math.abs(vol - lastVols[i]) / (lastVols[i] + .55), .03);
+            if (volChange === .03) {
+              console.log("Maxed");
+            }
 
             // experiment: makes it a little more jerky but maybe feels more responsive to music. not using for now
             // idea was to de-emphasize times when volume gets quieter and emphasize times where volume increases
@@ -118,11 +133,13 @@ var beginVisualization = function () {
             var newVol = .05 * vol + (1 - .05) * smoothedVols[i];
 
             // pass volume change to loop as parameter for its next movement
-            if (i === loops.length - 1) {
+            // if (i === loops.length - 1) {
                 //                console.log(newVol);
-            }
-            loops[i].update(volChange, newVol, .55, new Point(view.size.width * (i + 1) / (loops.length + 1), view.size.height / 2));
-            //            loops[i].update(volChange, newVol, .55, new Point(view.size.width / 2, view.size.height / 2));
+            // }
+            var blobWidth = 5 - 5 * numLoops / (numLoops + 5);
+            // var blobWidth = 2;
+            loops[i].update(volChange, newVol, .55, new Point(.5 * (view.size.width - view.size.width/blobWidth) + view.size.width/blobWidth * (i + 1) / (loops.length + 1), view.size.height / 2));
+            // loops[i].update(volChange, newVol, .55, new Point(view.size.width / 2, view.size.height / 2));
 
             // gross hard coded thing to find brightness proportional to volume
             var brightness = vol / .7;
