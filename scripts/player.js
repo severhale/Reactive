@@ -30,19 +30,15 @@ var beginAudio = function () {
     if (localFile) {
         if (source === null) {
           source = context.createMediaElementSource(audioElement);
-          source.connect(analyser);
-          analyser.connect(context.destination);
         }
 
         audioElement.load();
-        audioElement.play();
     } else {
         navigator.getUserMedia({
                 audio: true
             },
             function (stream) {
                 source = context.createMediaStreamSource(stream);
-                source.connect(analyser);
             },
             function (e) {
                 alert('Error capturing audio.');
@@ -50,6 +46,11 @@ var beginAudio = function () {
         );
     }
 
+    audioElement.addEventListener("canplay", function(event) {
+      source.connect(analyser);
+      analyser.connect(context.destination);
+      audioElement.play();
+    });
 };
 
 // pause audio
