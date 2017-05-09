@@ -27,26 +27,29 @@ var beginAudio = function () {
       analyser.fftSize = numFreqs * 2;
     }
 
-    if (localFile) {
-        if (source === null) {
-          source = context.createMediaElementSource(audioElement);
-        }
-
-        audioElement.load();
-    } else {
-        navigator.getUserMedia({
-                audio: true
-            },
-            function (stream) {
-                source = context.createMediaStreamSource(stream);
-            },
-            function (e) {
-                alert('Error capturing audio.');
-            }
-        );
-    }
+    audioElement.load();
 
     audioElement.addEventListener("canplay", function(event) {
+
+      if (localFile) {
+          if (source === null) {
+            source = context.createMediaElementSource(audioElement);
+          }
+
+          // audioElement.load();
+      } else {
+          navigator.getUserMedia({
+                  audio: true
+              },
+              function (stream) {
+                  source = context.createMediaStreamSource(stream);
+              },
+              function (e) {
+                  alert('Error capturing audio.');
+              }
+          );
+      }
+
       source.connect(analyser);
       analyser.connect(context.destination);
       audioElement.play();
