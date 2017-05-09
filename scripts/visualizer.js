@@ -12,6 +12,9 @@ var playing = false;
 
 // put it all in a function so it can be triggered by a button or a key press
 var beginVisualization = function () {
+
+    numLoops = parseInt(document.getElementById("numBlobs").value);
+
     // initializing paper.js
     paper.install(window);
     var canvas = document.getElementById('canvas');
